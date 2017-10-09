@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use AbleTo\Option;
 use AbleTo\Question;
-use AbleTo\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -24,8 +23,7 @@ class QuestionsApiTest extends TestCase
     /** @test */
     public function it_gets_a_list_of_questions()
     {
-        $user = factory(User::class)->create();
-        $this->actingAs($user);
+        $this->logIn();
 
         factory(Question::class, 5)->create();
 
@@ -39,8 +37,7 @@ class QuestionsApiTest extends TestCase
     /** @test */
     public function it_includes_the_options_with_the_questions()
     {
-        $user = factory(User::class)->create();
-        $this->actingAs($user);
+        $this->logIn();
 
         factory(Option::class, 5)->create();
 

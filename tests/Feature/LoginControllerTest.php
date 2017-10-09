@@ -56,7 +56,7 @@ class LoginControllerTest extends TestCase
     /** @test */
     public function a_user_can_logout()
     {
-        $this->actingAs($user = factory(User::class)->create());
+        $this->logIn();
 
         $response = $this->post("/logout");
 

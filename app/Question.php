@@ -14,13 +14,6 @@ class Question extends Model
     protected $fillable = ['text'];
 
     /**
-     * Always include the following relations.
-     *
-     * @var array
-     */
-    protected $with = ['options'];
-
-    /**
      * Get the options for the question.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

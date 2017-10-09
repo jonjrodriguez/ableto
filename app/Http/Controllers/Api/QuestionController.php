@@ -20,6 +20,6 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return QuestionResource::collection(Question::all());
+        return QuestionResource::collection(Question::with('options')->get());
     }
 }
