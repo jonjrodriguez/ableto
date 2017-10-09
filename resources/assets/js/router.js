@@ -5,7 +5,8 @@ Vue.use(Router);
 
 import Home from './views/Home.vue';
 import Survey from './views/Survey.vue';
-import NotFound from './views/NotFound.vue';;
+import ViewSurvey from "./views/ViewSurvey.vue";
+import NotFound from './views/NotFound.vue';
 
 export default new Router({
     mode: 'history',
@@ -14,6 +15,7 @@ export default new Router({
     routes: [
         { path: '/', component: Home },
         { path: '/survey', component: Survey },
+        { path: '/survey/:date', component: ViewSurvey, props: true },
         { path: '*', component: NotFound }
     ]
 });

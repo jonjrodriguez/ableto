@@ -37,6 +37,10 @@ class AnswerController extends Controller
             '*.option_id' => 'required|exists:options,id'
         ]);
 
+        if (!$answers['*']) {
+            return response(['error' => 'You must submit your answers.'], 422);
+        }
+
         return response(['data' => auth()->user()->answers()->createMany($answers['*'])], 201);
     }
 

@@ -7,7 +7,7 @@
                     v-for="question in questions"
                     :question="question"
                     :key="question.id"
-                    v-model="answers[question.id]"
+                    v-model="answers[question.id].option_id"
             />
 
             <button class="btn btn-primary" type="submit">
@@ -28,7 +28,7 @@
     export default {
         name: 'Survey',
 
-        components: {Question},
+        components: { Question },
 
         data() {
             return {
@@ -47,10 +47,28 @@
                 }
 
                 return true;
+            },
+
+            today() {
+                const today = new Date();
+
+                let year = today.getFullYear();
+                let month = today.getMonth()+1;
+                let day = today.getDate();
+
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+
+                return `${year}-${month}-${day}`;
             }
         },
 
         created() {
+            this.checkSubmitted();
             this.fetchData();
         },
 
@@ -60,9 +78,18 @@
                     .then(response => {
                         this.questions = response.data.data;
                         this.answers = this.questions.reduce((acc, curr) => {
-                            acc[curr.id] = 0;
+                            acc[curr.id] = { question_id: curr.id, option_id: 0 };
                             return acc;
                         }, {});
+                    });
+            },
+
+            checkSubmitted() {
+                axios.get(`/api/answers/${this.today}`)
+                    .then(response => {
+                        if (response.data.data.length) {
+                            this.$router.push('/');
+                        }
                     });
             },
 
@@ -73,9 +100,9 @@
                 }
 
                 this.error = '';
-                axios.post('/api/answers')
+                axios.post('/api/answers', this.answers)
                     .then(response => {
-                       console.log(response);
+                       this.$router.push('/');
                     });
             }
         }
