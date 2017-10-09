@@ -17,7 +17,7 @@
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
-                <div class="navbar-header">
+                <div class="navbar-header pull-left">
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
                         AbleTo
@@ -25,19 +25,13 @@
                 </div>
 
                 <div>
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav pull-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li class="pull-right"><a href="{{ route('register') }}">Register</a></li>
+                            <li class="pull-right"><a href="{{ route('login') }}">Login</a></li>
                         @else
-                            <p class="navbar-text">Signed in as {{ Auth::user()->name }}</p>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
