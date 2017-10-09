@@ -3,8 +3,9 @@ import Router from 'vue-router'
 
 Vue.use(Router);
 
-const Home = { render: h => h('h1', 'Home') };
-import NotFound from './views/NotFound.vue';
+import Home from './views/Home.vue';
+import Survey from './views/Survey.vue';
+import NotFound from './views/NotFound.vue';;
 
 export default new Router({
     mode: 'history',
@@ -12,6 +13,7 @@ export default new Router({
     scrollBehavior: () => ({y: 0}),
     routes: [
         { path: '/', component: Home },
+        { path: '/survey', component: Survey },
         { path: '*', component: NotFound }
     ]
 });

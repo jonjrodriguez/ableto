@@ -3,4 +3,4 @@
 Auth::routes();
 
 // Catch all route
-Route::any('{all}', 'HomeController@index')->where(['all' => '.*']);
+Route::get('{all}', 'HomeController@index')->where(['all' => '.*']);
