@@ -15,19 +15,21 @@ class AnswersTableSeeder extends Seeder
     public function run()
     {
         $questions = Question::with('options')->get();
-        $user = User::find(1);
+        $users = User::take(10)->get();
 
-        for ($i = 1; $i < 10; $i++) {
-            $date = \Carbon\Carbon::now()->subDays($i);
+        foreach ($users as $user) {
+            for ($i = 1; $i < 10; $i++) {
+                $date = \Carbon\Carbon::now()->subDays($i);
 
-            $questions->each(function ($question) use ($user, $date, $i) {
-                factory(Answer::class)->create([
-                   'user_id' => $user->id,
-                   'question_id' => $question->id,
-                   'option_id' => $question->options[$i % 3]->id,
-                   'created_at' => $date
-                ]);
-            });
+                $questions->each(function ($question) use ($user, $date, $i) {
+                    factory(Answer::class)->create([
+                    'user_id' => $user->id,
+                    'question_id' => $question->id,
+                    'option_id' => $question->options[$i % 3]->id,
+                    'created_at' => $date
+                    ]);
+                });
+            }
         }
     }
 }
